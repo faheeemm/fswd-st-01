@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Online Student Admission Form — Registrar's Office</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="wrap">
+
+  <aside class="side">
+    <p class="eyebrow">Registrar's office</p>
+    <h1>Online admission intake</h1>
+    <p class="lede">Manual admission forms mean paperwork and data-entry errors. This intake form collects applicant information directly, checks it as you go, and keeps every submission in one organized ledger.</p>
+
+    <ol class="steps">
+      <li class="active"><span class="n">01</span><span>Fill in applicant details</span></li>
+      <li><span class="n">02</span><span>Form checks entries for errors</span></li>
+      <li><span class="n">03</span><span>Submit the application</span></li>
+      <li><span class="n">04</span><span>Receive an admission ticket</span></li>
+    </ol>
+
+    <div class="nav-toggle">
+      <button id="navForm" class="on" onclick="showView('form')">New application</button>
+      <button id="navLedger" onclick="showView('ledger')">Applications ledger</button>
+    </div>
+  </aside>
+
+  <main class="main">
+
+    <div id="formView">
+      <h2 class="title">Applicant information</h2>
+      <p class="sub">Fields marked with an asterisk are required.</p>
+
+      <form id="admissionForm" novalidate>
+
+        <fieldset>
+          <legend>Applicant details</legend>
+          <div class="row">
+            <div class="field" data-field="fullName">
+              <label for="fullName">Full name *</label>
+              <input type="text" id="fullName" name="fullName" placeholder="Aisha Rahman">
+              <p class="err">Enter the applicant's full name.</p>
+            </div>
+            <div class="field" data-field="dob">
+              <label for="dob">Date of birth *</label>
+              <input type="date" id="dob" name="dob">
+              <p class="err">Enter a date of birth.</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="field" data-field="gender">
+              <label for="gender">Gender *</label>
+              <select id="gender" name="gender">
+                <option value="">Select one</option>
+                <option>Female</option>
+                <option>Male</option>
+                <option>Other</option>
+                <option>Prefer not to say</option>
+              </select>
+              <p class="err">Select a gender.</p>
+            </div>
+            <div class="field" data-field="course">
+              <label for="course">Course applying for *</label>
+              <select id="course" name="course">
+                <option value="">Select a course</option>
+                <option>B.Tech Computer Science</option>
+                <option>B.Tech Information Security</option>
+                <option>B.Sc Mathematics</option>
+                <option>B.Com Honours</option>
+                <option>BBA</option>
+              </select>
+              <p class="err">Select a course.</p>
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Academic background</legend>
+          <div class="row">
+            <div class="field" data-field="prevSchool">
+              <label for="prevSchool">Previous school / college *</label>
+              <input type="text" id="prevSchool" name="prevSchool" placeholder="St. Xavier's Junior College">
+              <p class="err">Enter the previous institution's name.</p>
+            </div>
+            <div class="field" data-field="percentage">
+              <label for="percentage">Percentage / grade *</label>
+              <input type="number" id="percentage" name="percentage" min="0" max="100" step="0.1" placeholder="87.5">
+              <p class="err">Enter a percentage between 0 and 100.</p>
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Contact details</legend>
+          <div class="row">
+            <div class="field" data-field="email">
+              <label for="email">Email address *</label>
+              <input type="email" id="email" name="email" placeholder="aisha@example.com">
+              <p class="err">Enter a valid email address.</p>
+            </div>
+            <div class="field" data-field="phone">
+              <label for="phone">Phone number *</label>
+              <input type="tel" id="phone" name="phone" placeholder="10-digit mobile number">
+              <p class="err">Enter a valid 10-digit phone number.</p>
+            </div>
+          </div>
+          <div class="field" data-field="address">
+            <label for="address">Address *</label>
+            <textarea id="address" name="address" placeholder="House number, street, city, PIN code"></textarea>
+            <p class="err">Enter a mailing address.</p>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Guardian details</legend>
+          <div class="row">
+            <div class="field" data-field="guardianName">
+              <label for="guardianName">Guardian name *</label>
+              <input type="text" id="guardianName" name="guardianName" placeholder="Parent or guardian's name">
+              <p class="err">Enter a guardian's name.</p>
+            </div>
+            <div class="field" data-field="guardianPhone">
+              <label for="guardianPhone">Guardian phone *</label>
+              <input type="tel" id="guardianPhone" name="guardianPhone" placeholder="10-digit mobile number">
+              <p class="err">Enter a valid 10-digit phone number.</p>
+            </div>
+          </div>
+        </fieldset>
+
+        <div class="submit-row">
+          <button type="submit" class="primary">Submit application</button>
+          <span class="form-note">You'll get an admission ticket with a reference ID.</span>
+        </div>
+      </form>
+
+      <div class="ticket" id="ticket">
+        <div class="stamp">Received</div>
+        <p class="eyebrow2">Admission ticket</p>
+        <h3 id="ticketName">Applicant name</h3>
+        <dl>
+          <dt>Reference ID</dt><dd id="ticketId">—</dd>
+          <dt>Course</dt><dd id="ticketCourse">—</dd>
+          <dt>Submitted</dt><dd id="ticketDate">—</dd>
+        </dl>
+        <div class="ticket-actions">
+          <button class="primary" onclick="window.print()">Print ticket</button>
+          <button class="ghost" onclick="resetForm()">Submit another application</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="ledgerView" class="ledger">
+      <h2 class="title">Applications ledger</h2>
+      <p class="sub">Every submission collected through this form, in one place.</p>
+      <div id="ledgerTableWrap"></div>
+    </div>
+
+  </main>
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
